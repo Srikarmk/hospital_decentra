@@ -15,9 +15,9 @@ module.exports = {
   target: "web",
   mode: isDevelopment ? "development" : "production",
   entry: {
-    // The frontend.entrypoint points to the HTML file for this build, so we need
+    // The frontend.entrypoint points to the HTML file for this build, so you need
     // to replace the extension to `.js`.
-    index: path.join(__dirname, frontend_entry).replace(/\.html$/, ".js"),
+    index: path.join(__dirname, frontend_entry).replace(/\.html$/, ".jsx"),
   },
   devtool: isDevelopment ? "source-map" : false,
   optimization: {
@@ -50,6 +50,11 @@ module.exports = {
   //    { test: /\.css$/, use: ['style-loader','css-loader'] }
   //  ]
   // },
+  module: {
+    rules: [
+      { test: /\.(js|ts)x?$/, loader: "ts-loader" }
+    ]
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, frontend_entry),
